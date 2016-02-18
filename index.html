@@ -1,0 +1,669 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>An overview of Ambari</title>
+
+		<meta name="description" content="An overview of Ambari">
+		<meta name="author" content="Mauro Cortellazzi">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/radicalbit.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h2>KSI - An overview of Apache Ambari</h2>
+					<p>
+						<small>Mauro Cortellazzi - Milan - 19th February 2016</small>
+					</p>
+				</section>
+
+				<section style="text-align: left;">
+					<h2>Agenda</h2>
+					<ol>
+						<li>Apache Ambari overview</li>
+						<li>Extensibility Features</li>
+						<li>Ambari Stacks</li>
+						<li>Ambari Stack Services</li>
+						<li>Ambari Views</li>
+						<li>Ambari Blueprints</li>
+						<li>Final considerations</li>
+					</ol>
+				</section>
+
+				<section>
+					<section>
+						<h1>Apache Ambari overview</h1>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+							##What Ambari Does
+							> Ambari enables system administrators to provision, manage and monitor a **Hadoop cluster**, and also to integrate **Hadoop** with the existing enterprise infrastructure.
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+							##Provision a Hadoop Cluster
+							- No matter the size of your Hadoop cluster, the deployment and maintenance of hosts is simplified
+							- Intuitive Web interface that allows you to easily provision, configure and test all the Hadoop services and core components
+							- Powerful Blueprints API for automating cluster installations without user intervention
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+							##Manage a Hadoop cluster
+							Ambari provides tools to simplify cluster management.
+
+							The Web interface allows you to control the lifecycle of Hadoop services and components, modify configurations and manage the ongoing growth of your cluster.
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+							##Monitor a Hadoop cluster
+							Gain instant insight into the health of your cluster.
+
+							Ambari pre-configures alerts for watching Hadoop services and visualizes cluster operational data in a simple Web interface.
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+							##Integrate Hadoop with the Enterprise
+							Ambari provides a RESTful API that enables integration with existing tools, to merge Hadoop with established operational processes.
+						</script>
+					</section>
+					<section style="font-size: 0.6em;">
+						<h2>Most important features</h2>
+						<table>
+							<thead>
+								<tr>
+									<th>Feature</th>
+									<th>Benefit</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>Wizard-driven interface</td>
+									<td>Facilitates installation of Hadoop across any number of hosts</td>
+								</tr>
+								<tr>
+									<td>API-driven installations</td>
+									<td>Ambari Blueprints for automated provisioning</td>
+								</tr>
+								<tr>
+									<td>Granular service control</td>
+									<td>Precise management of Hadoop services and component lifecycles</td>
+								</tr>
+								<tr>
+									<td>Configuration change history</td>
+									<td>Ongoing management of Hadoop service configurations</td>
+								</tr>
+								<tr>
+									<td>RESTful APIs</td>
+									<td>Enables integration with enterprise systems</td>
+								</tr>
+								<tr>
+									<td>Extensible framework</td>
+									<td>Brings custom services under management via Ambari Stacks</td>
+								</tr>
+								<tr>
+									<td>Customizable user interface</td>
+									<td>Develop innovative user experiences via Ambari Views Framework</td>
+								</tr>
+								<tr>
+									<td>User Views</td>
+									<td>Advanced capabilities for cluster optimization and tuning for Hadoop DevOps</td>
+								</tr>
+							</tbody>
+						</table>
+					</section>
+					<section style="text-align: left;">
+						<h1>Let's see it!</h1>
+						<p>Woooohhhhh....</p>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h1>Extensibility Features</h1>
+						<p><i>Extend</i> Ambari without hard-coding <i>in</i> Ambari</p>
+					</section>
+					<section style="font-size: 0.7em;">
+						<h2>Extension Points</h2>
+						<table>
+							<thead>
+								<tr>
+									<th>Point</th>
+									<th>Feature</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>Stacks</td>
+									<td>
+										<ul>
+											<li>To add new Services beyond a Stack</li>
+											<li>To customize a Stack for customer specific environments</li>
+										</ul>
+									</td>
+								</tr>
+								<tr>
+									<td>Views</td>
+									<td>
+										<ul>
+											<li>To extend and customize the Ambari Web UI</li>
+											<li>Add new capabilities, customize existing capabilities</li>
+										</ul>
+									</td>
+								</tr>
+								<tr>
+									<td>Blueprints</td>
+									<td>
+										<ul>
+											<li>To use Ambari for automating cluster installations</li>
+											<li>To share best practices on layout and cluster configuration</li>
+										</ul>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+							##Anatomy of Ambari Extension Points
+							<img width="80%" data-src="images/ambari-anatomy-of-extension-points.png">
+						</script>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h1>Ambari Stacks</h1>
+					</section>
+					<section style="font-size: 0.7em;">
+						<h2>Stack Terminology</h2>
+						<table>
+							<thead>
+								<tr>
+									<th>Term</th>
+									<th>Definition</th>
+									<th>Examples</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>STACK</td>
+									<td>Defines a set of Services, where to obtain the software packages and how to manage the lifecycle.</td>
+									<td>HDP-2.0, RBP-1.0</td>
+								</tr>
+								<tr>
+									<td>SERVICE</td>
+									<td>Defines the Components that make-up the Service.</td>
+									<td>HDFS, YARN, TACHYON</td>
+								</tr>
+								<tr>
+									<td>COMPONENT</td>
+									<td>The building-blocks of a Service, that adhere to a certain lifecycle.</td>
+									<td>NAMENODE, DATANODE, TACHYON_MASTER, TACHYON_WORKER</td>
+								</tr>
+								<tr>
+									<td>CATEGORY</td>
+									<td>The category of Component.</td>
+									<td>MASTER, SLAVE, CLIENT</td>
+								</tr>
+							</tbody>
+						</table>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+							##Stack Mechanics
+							- **Stacks define Services + Repos**
+
+							  - What is in the Stack, and where to get the bits
+
+							- **Each Service has a definition**
+
+							  - What Components are part of the Service
+
+							- **Each Service has defined lifecycle commands**
+
+							  - start, stop, status, install, configure
+
+							- **Lifecycle is controlled via command scripts**
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+							##Stack Mechanics
+							<img width="100%" data-src="images/ambari-stack-mechanics.png">
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+							##Stack Contents
+							- **configuration**: stack configurations
+
+							- **hooks**: stack lifecycle command scripts
+
+							- **repos**: definition of repos used to install stack services
+
+							- **services**: set of stack services (definition + lifecycle)
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+							##Stacks Support Inheritance
+							<img width="90%" data-src="images/ambari-stack-inheritance.png">
+						</script>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h1>Ambari Stack Services</h1>
+					</section>
+					<section>
+						<h2>What is a service?</h2>
+						<p style="text-align: left;">
+							A service is a set a configurations ad scripts to define and manage a single framework and its components.
+						</p>
+					</section>
+					<section data-markdown style="font-size: 0.7em;">
+						<script type="text/template">
+							<h2>Files needed to create an Ambari service</h2>
+							<p style="text-align: left;">
+								<ul>
+									<li>Service definition file (metainfo.xml)</li>
+									<li>Service configuration file (myservice-config.xml)</li>
+									<li>Service configuration parameters (params.py)</li>
+									<li>Service management python script (service.py)</li>
+									<li>Service status configuration file (myservice-env.xml) [Not always needed]</li> <!-- .element: class="fragment" -->
+									<li>Service status configuration parameters (status_params.py) [Not always needed]</li> <!-- .element: class="fragment" -->
+								</ul>
+							</p>
+						</script>
+					</section>
+					<section data-markdown style="font-size: 0.7em;">
+						<script type="text/template">
+							##Service Definition (metainfo.xml)
+							<img width="50%" data-src="images/ambari-service-metainfo.png">
+						</script>
+					</section>
+					<section data-markdown style="font-size: 0.7em;">
+						<script type="text/template">
+							##Service Configuration (myservice-config.xml)
+							<img data-src="images/ambari-service-config.png">
+						</script>
+					</section>
+					<section data-markdown style="font-size: 0.7em;">
+						<script type="text/template">
+							##Service Status Configuration (myservice-env.xml)
+							<img data-src="images/ambari-service-env.png">
+						</script>
+					</section>
+					<section data-markdown style="font-size: 0.7em;">
+						<script type="text/template">
+							##Service Configuration Params (params.py)
+							Python script to read configuration properties from myservice–config.xml
+
+							```
+							from resource_management import *
+
+							# server configurations
+							config = Script.get_config()
+
+							underfs_addr = config['configurations']['tachyon-config']['tachyon.underfs.address']
+							worker_memory = config['configurations']['tachyon-config']['tachyon.worker.memory']
+							```
+						</script>
+					</section>
+					<section data-markdown style="font-size: 0.7em; text-align: left;">
+						<script type="text/template">
+							##Service master python script (service.py)
+							Must override the class below
+							```
+							resource_management.libraries.script.script.Script
+							```
+							And override the follow methods:
+							- def install – called to install service
+							- def start – called to start service
+							- def stop – called to stop the service
+							- def status – called to get status of service
+							- def configure – called to configure service
+						</script>
+					</section>
+					<section data-markdown style="font-size: 0.6em;">
+						<script type="text/template">
+							##Service.py - example
+							```
+							from resource_management.libraries.script.script import Script
+							class MyService(Script):
+								def install(self, env):
+									#Install packages from metainfo.xml
+									self.install_packages(env)
+									self.configure(env)
+									#code to install service
+								def start(self, env):
+									import params
+									import status_params
+									#code to start service
+								def configure(self, env):
+									import params
+									env.set_params(params)
+									#code to re-configure service
+								def stop(self, env):
+									import status_params
+									env.set_params(status_params)
+									self.configure(env)
+									Execute (format('kill `cat {stack_pidfile}` >/dev/null 2>&1'))
+									Execute (format("rm -f {stack_pidfile}"))
+								def status(self, env):
+									import status_params
+									env.set_params(status_params)
+									check_process_status(status_params.stack_pidfile)
+							if __name__ == "__main__":
+							  MyService().execute()
+							```
+						</script>
+					</section>
+					<section style="text-align: left;">
+						<h1>Let's do it!</h1>
+						<h3><i>(JUST A DEMO)</i></h3>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h1>Ambari Views</h1>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+							##Goal
+							> Enable the delivery of custom UI experiences in Ambari Web
+
+							There are two mainly kinds of changes on Ambari UI:
+							- extend and customize the existing Ambari Web UI
+							- add new capabilities
+						</script>
+					</section>
+					<section data-markdown style="font-size: 0.6em; text-align: left;">
+						<script type="text/template">
+							##Extend and customize the existing Ambari Web UI
+							Add into folder:
+							```
+							/ambari/ambari-common/src/main/python/pluggable_stack_definition/resources/%STACK_NAME%
+							```
+							- **custom-ui.less**: all stylesheet overrides on Ambari web platform
+							- **custom-admin-ui.css**: all stylesheet overrides on Ambari Admin view
+						</script>
+					</section>
+					<section data-markdown style="font-size: 0.7em;">
+						<script type="text/template">
+							##Add new capabilities - Ambari Views Framework
+							- Developers can extend the Ambari Web interface and add new capabilities
+							- Ambari Admins can entitle Views to Ambari Web users
+							- Deploy multiple versions and create multiple instances of a single view
+						</script>
+					</section>
+					<section data-markdown style="font-size: 0.7em;">
+						<script type="text/template">
+							##View Components
+							- Serve client-side assets (such as HTML + JavaScript)
+							- Expose server-side resources (such as REST endpoints)
+							<img width="90%" data-src="images/ambari-view-components.png">
+						</script>
+					</section>
+					<section style="font-size: 0.7em;">
+						<h2>Views Framework Terminology</h2>
+						<table>
+							<thead>
+								<tr>
+									<th>Term</th>
+									<th>Description</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>View Definition</td>
+									<td>Describes the view resources and core view properties such as name,	version and any necessary configuration properties.</td>
+								</tr>
+								<tr>
+									<td>View Package</td>
+									<td>Packages the view client and server assets (and dependencies)</td>
+								</tr>
+								<tr>
+									<td>View Deployment</td>
+									<td>Deploying a view into Ambari</td>
+								</tr>
+								<tr>
+									<td>View Version</td>
+									<td>A specific version of a view</td>
+								</tr>
+								<tr>
+									<td>View Instance</td>
+									<td>An instantiation of a specific view version</td>
+								</tr>
+								<tr>
+									<td>Framework Services</td>
+									<td>View context, instance data, configuration properties and events</td>
+								</tr>
+							</tbody>
+						</table>
+					</section>
+					<section data-markdown style="font-size: 0.7em;">
+						<script type="text/template">
+							##Maven build file (pom.xml)
+							```
+<modelVersion>4.0.0</modelVersion>
+<artifactId>ambari-tachyon-view</artifactId>
+<packaging>jar</packaging>
+<name>Ambari Tachyon View</name>
+<groupId>com.github.maocorte</groupId>
+<version>1.0-SNAPSHOT</version>
+<url>https://github.com/maocorte/ambari-tachyon-view</url>
+
+<properties>
+  <ambari.version>2.2.0.0.0</ambari.version>
+</properties>
+<dependencies>
+  <dependency>
+    <groupId>org.apache.ambari</groupId>
+    <artifactId>ambari-views</artifactId>
+    <version>${ambari.version}</version>
+  </dependency>
+</dependencies>
+							```
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+							##View Definition (view.xml)
+							```
+							<view>
+							  <name>TACHYON_UI</name>
+							  <label>Tachyon UI</label>
+							  <version>1.0.0</version>
+							  <instance>
+							    <name>INSTANCE_1</name>
+							  </instance>
+							</view>
+							```
+						</script>
+					</section>
+					<section data-markdown style="font-size: 0.7em;">
+						<script type="text/template">
+							##View Context
+							- Available to the view server-side through injection.
+							- Provides access to instance configuration.
+							- Provides access to the view and instance attributes.
+							- Provides access to run time information about the current execution context, including authenticated user principal.
+							```
+							public interface ViewContext {
+								public String getUsername();
+								public String getViewName();
+								public String getInstanceName();
+								public Map<String, String> getProperties();
+								public void putInstanceData(...);
+								public String getInstanceData(...);
+							}
+							```
+						</script>
+					</section>
+					<section data-markdown style="font-size: 0.6em; text-align: left;">
+						<script type="text/template">
+							##View Deployment
+
+							Place view-package.jar on Ambari Server
+							```
+							/var/lib/ambari-server/resources/views
+							```
+							Restart Ambari Server to start deployment
+							```
+							ambari-server restart
+							```
+							Deployment registers the view with Ambari and extracts the view
+							```
+							/var/lib/ambari-server/resources/views/work
+							```
+							Once complete, the view is available to create instances
+						</script>
+					</section>
+					<section style="text-align: left;">
+						<h1>Let's do it!</h1>
+						<h3><i>(JUST A DEMO)</i></h3>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h1>Ambari Blueprints</h1>
+						<p>Deploying clusters of any scale with ease</p>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+							##Before Ambari
+							- Manual installation
+							- Manual configuration
+							- Manual distribution of configuration
+							- XML
+							- XML
+							- XML
+							- XML
+							- XML
+							- ...
+						</script>
+					</section>
+					<section data-markdown>
+						<script type="text/template">
+							##Ambari comes - Install wizard
+							<img width="90%" data-src="images/ambari-wizard.png">
+						</script>
+					</section>
+					<section data-markdown style="font-size: 0.7em;">
+						<script type="text/template">
+							##Automation with Ambari Blueprints
+							<img width="100%" data-src="images/ambari-blueprint-automation.png">
+						</script>
+					</section>
+					<section data-markdown style="font-size: 0.7em;">
+						<script type="text/template">
+							##2 HTTP calls for a Deployed Cluster
+							<img width="100%" data-src="images/ambari-blueprint-calls.png">
+						</script>
+					</section>
+				</section>
+
+				<section style="font-size: 0.7em;">
+					<h2>Final considerations</h2>
+					<div style="text-align: left;">
+						<ul>
+							<li>PROS</li>
+								<ul>
+									<li>Web interface to easly manage (almost) all operations on your cluster</li>
+									<li>No competitors on Hadoop platform cluster management</li>
+									<li>Pluggable services</li>
+									<li>Pluggable views</li>
+									<li>RESTful API</li>
+									<li>Already kerberized</li>
+									<li>Monitoring cluster iron and services</li>
+								</ul>
+							<li>CONS</li>
+								<ul>
+									<li>Not all REST endpoints are managed with web UI (ex. service deletion)</li>
+									<li>Not perfectly feasible if stack is different to HDP</li>
+									<li>Not really Apache</li>
+									<li>Docs.....WHAAAAAAAT??? REEEEALLY???</li>
+									<li>Jumble of technologies and languages</li>
+								</ul>
+						</ul>
+					</div>
+				</section>
+
+				<section data-markdown data-background="#fff">
+					<script type="text/template">
+						<img width="60%" height="60%" data-src="images/thank-you.jpg">
+					</script>
+				</section>
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
