@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>An overview of Ambari</title>
+		<title>KSI - An overview of Ambari</title>
 
 		<meta name="description" content="An overview of Ambari">
 		<meta name="author" content="Mauro Cortellazzi">
@@ -597,6 +597,14 @@
 						<script type="text/template">
 							##2 HTTP calls for a Deployed Cluster
 							<img width="100%" data-src="images/ambari-blueprint-calls.png">
+						</script>
+					</section>
+					<section data-markdown style="font-size: 0.7em;">
+						<script type="text/template">
+							##Export Cluster to Blueprint
+							```
+							GET /api/v1/clusters/my_cluster?format=blueprint
+							```
 						</script>
 					</section>
 				</section>
